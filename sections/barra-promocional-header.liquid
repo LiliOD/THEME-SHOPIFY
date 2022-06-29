@@ -1,0 +1,136 @@
+{%- if  section.blocks.size > 0 and section.settings.show_announcement_bar -%}
+<div class="hura-announcement-bar swiper-container">
+  <div class="hura-messages swiper-wrapper">
+    {%- for block in section.blocks -%}
+    <div class="hura-message swiper-slide">
+      <a href="{{block.settings.link}}"class="barra-promocional-header__link">
+        <p class="hura-mensaje">{{block.settings.message}}</p></a>
+    </div>
+    {%- endfor -%}
+  </div>
+  <div class="hura-swiper-button swiper-button-prev"></div>
+  <div class="hura-swiper-button swiper-button-next"></div>
+</div>
+<script src="//unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="//unpkg.com/swiper/swiper-bundle.min.css" />
+<script>
+  const swiper = new Swiper('.swiper-container', {
+    {%- if section.settings.autoplay %}
+    autoplay: {delay: {{section.settings.delay}} },
+    {%- endif -%}
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
+<style>
+  .hura-announcement-bar{
+    background:{{section.settings.colorBackground}};
+    position: relative;
+    overflow: hidden;
+    
+  }
+  
+  .hura-announcement-bar .hura-mensaje{
+    text-align:center;
+    {% if section.settings.bold-text %}
+    font-weight: bold;
+    {% endif %}
+    color:{{section.settings.colorText}};
+    padding:{{section.settings.altura}}px;
+    font-size:{{section.settings.font_size}}px;
+    font-family: 'montserrat';
+    letter-spacing: 0.1rem;
+    
+  }
+  .hura-announcement-bar .swiper-button-next:after, .hura-announcement-bar .swiper-container-rtl .swiper-button-prev:after,
+  .hura-announcement-bar .swiper-button-prev:after, .hura-announcement-bar .swiper-container-rtl .swiper-button-next:after{
+    font-size:15px;
+    color:{{section.settings.colorText}};
+  }
+  
+</style>
+{%- endif -%}
+ 
+{% schema %}
+  {
+    "name": "Announcement Bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_announcement_bar",
+        "label": "Show"
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Autoplay"
+      },
+      {
+        "type": "text",
+        "id": "delay",
+        "label": "Delay between transitions (in ms)",
+        "default": "5000"
+      },
+      {
+        "type": "color",
+        "id": "colorBackground",
+        "label": "Background color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "colorText",
+        "label": "Text color",
+        "default": "#ffffff"
+      },
+	  {
+		  "type": "range",
+          "id": "altura",
+          "min": 0,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño del banner",
+          "default": 6
+	  },
+	  {
+          "type": "range",
+          "id": "font_size",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "label": "Tamaño de letra",
+          "default": 14
+        },
+		{
+          "type": "checkbox",
+          "id": "bold-text",
+          "default": false,
+          "label": "Texto en negritas"
+        }
+
+],
+"blocks": [
+      {
+        "type": "header",
+        "name": "Message",
+        "settings": [
+{
+              "id": "message",
+              "type": "textarea",
+             "label": "Message"
+            },
+          {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+		  }
+        ]
+      }
+]
+  }
+{% endschema %}
