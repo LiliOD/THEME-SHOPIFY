@@ -1,12 +1,86 @@
+{% if section.settings.enabled %}
+{% endif %}
+
 {% schema %}
   {
-    "name": "Section name",
-    "settings": []
+    "name": "Announcement bar",
+    "tag": "section",
+    "settings": [
+      {
+         "type": "checkbox",
+         "id": "enabled",
+         "default": false,
+         "label": "Enable announcement bar"
+      },
+      {
+         "type": "textarea",
+         "id": "text",
+         "default": "Hello",
+         "label": "Text"
+      },
+      {
+         "type": "color",
+         "id": "background_color",
+         "label": "Background color",
+         "default": "#d62020"
+      },
+      {
+         "type": "color",
+         "id": "text_color",
+         "label": "Text color",
+         "default": "#ffffff"
+      },
+	  {
+        "id": "banner_link",
+        "type": "url",
+        "label": "Banner link"
+      },
+	  {
+         "type": "number",
+         "id": "top_margin",
+         "default": 0,
+         "label": "Top margin (px)"
+      },
+	  {
+         "type": "header",
+         "content": "Countdown timer"
+      },
+	  {
+         "type": "checkbox",
+         "id": "timer_enabled",
+         "default": false,
+         "label": "Enable countdown timer"
+      },
+      {
+         "type": "text",
+         "id": "timer_date",
+         "label": "Expiration date",
+		 "info": "Format: YYYY-MM-DD"
+      },
+      {
+         "type": "text",
+         "id": "timer_days_label",
+         "label": "Days label",
+		 "default": "Days"
+      },
+      {
+         "type": "text",
+         "id": "timer_hours_label",
+         "label": "Hours label",
+		 "default": "Hours"
+      },
+      {
+         "type": "text",
+         "id": "timer_minutes_label",
+         "label": "Minutes label",
+		 "default": "Minutes"
+      },
+      {
+         "type": "text",
+         "id": "timer_seconds_label",
+         "label": "Seconds label",
+		 "default": "Seconds"
+      }
+    ]
   }
 {% endschema %}
-
-{% stylesheet %}
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}
